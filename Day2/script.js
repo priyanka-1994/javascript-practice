@@ -19,7 +19,7 @@ addBtn.addEventListener('click',() => {
       const status = li.getAttribute('data-status');
       if(status === 'pending'){
          li.classList.add('done');
-         li.setAttribute('data-status','data');
+         li.setAttribute('data-status','done');
       } else {
         li.classList.remove('done');
         li.setAttribute('data-status','pending')
