@@ -14,4 +14,10 @@ function tip_calculator(){
 
   tipAmountDisplay.textContent = tipAmount.toFixed(2)
   totalAmountDisplay.textContent = totalAmount.toFixed(2)
+
+  let message;
+  if(tipPercent<=10) message = "Basic Service";
+  else if(tipPercent<=15) message = "Good Service";
+  else message = "Excellent Service";
+  document.getElementById("feedback").textContent = message;
 }
