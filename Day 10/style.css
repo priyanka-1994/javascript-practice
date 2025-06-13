@@ -1,0 +1,89 @@
+:root {
+  --bg-color: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  transition: background 0.5s ease-in-out;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 18px;
+  margin-bottom: 25px;
+  color: #444;
+}
+
+#colorCode {
+  font-weight: bold;
+  color: #111;
+  background: #eee;
+  padding: 6px 10px;
+  border-radius: 6px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+button {
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+button:nth-child(1) { background: linear-gradient(45deg, #00c6ff, #0072ff); }
+button:nth-child(2) { background: linear-gradient(45deg, #ff6b6b, #ee5253); }
+button:nth-child(3) { background: linear-gradient(45deg, #1dd1a1, #10ac84); }
+button:nth-child(4) { background: linear-gradient(45deg, #54a0ff, #2e86de); }
+button:nth-child(5) { background: linear-gradient(45deg, #f368e0, #ee82ee); }
+
+@media (max-width: 500px) {
+  .container {
+    padding: 20px;
+  }
+  button {
+    width: 100%;
+  }
+}
