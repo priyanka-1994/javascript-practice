@@ -1,34 +1,193 @@
-body {
-  font-family: Arial,sans-serif;
-  max-width: 500px;
-  margin: 50px auto;
-  background-color: pink;
-  text-align: center;
+/* Basic Reset and Box Sizing */
+* {
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    margin: 0;             /* Remove default margins */
+    padding: 0;            /* Remove default paddings */
 }
 
-input {
-  padding: 8px;
-  width: 70%;
-  font-size: 16px;
+/* Body Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A modern, readable font */
+    min-height: 100vh; /* Ensures the body takes at least the full viewport height */
+    display: flex;     /* Use flexbox for easy centering of the container */
+    justify-content: center; /* Center the container horizontally */
+    align-items: center;     /* Center the container vertically */
+    background-color: #dab88b; /* A pleasant, warm background color */
+    padding: 20px;     /* Add some padding around the container on smaller screens */
+    overflow-x: hidden; /* Prevent horizontal scrolling if anything accidentally overflows */
 }
-button{
-  padding: 8px 12px;
-  font-size: 16px;
-  cursor:pointer;
+
+/* Main Container Styles */
+.container {
+    height: auto;       /* Allow height to adjust to content */
+    min-height: 250px;  /* Minimum height for better appearance */
+    max-height: 90vh;   /* Maximum height, allow vertical scroll if content exceeds this */
+    overflow-y: auto;   /* Enable vertical scrolling if content overflows */
+
+    width: 90%;         /* Take 90% of the screen width */
+    max-width: 500px;   /* Cap the width at 500px on larger screens for readability */
+    
+    padding: 25px;      /* Generous padding inside the container */
+    border-radius: 12px; /* Nicely rounded corners */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* More prominent shadow for depth */
+    background-color: #fff; /* White background for the main container */
+    color: #333; /* Default text color inside container */
+
+    display: flex;      /* Make container a flexbox to center its children */
+    flex-direction: column; /* Stack children (h1, input-group, ul) vertically */
+    align-items: center; /* Center children horizontally within the container */
 }
-ul {
-  list-style-type: none;
-  padding-left: 0;
+
+/* Heading Styles */
+h1 {
+    text-align: center;
+    margin-bottom: 25px; /* Space below the heading */
+    color: #6a451e; /* Darker brown for heading, consistent with theme */
+    font-size: 2.2em; /* Larger heading */
+    width: 100%; /* Ensures the heading takes full width for centering */
 }
+
+/* Input Group (Input field and Add button) Styles */
+.input-group {
+    display: flex; /* Arrange input and button side-by-side */
+    gap: 10px;     /* Space between input and button */
+    margin-bottom: 25px; /* Space below the input group */
+    width: 100%; /* Ensure it spans the container's width */
+}
+
+/* Input Field Styles */
+input#taskInput {
+    flex: 1; /* Allows the input field to grow and take available space */
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd; /* Subtle border */
+    outline: none; /* Remove default focus outline */
+    font-size: 16px;
+    background: #f9f9f9; /* Slightly off-white background */
+    color: #333; /* Text color inside input */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* Subtle inner shadow */
+    transition: border-color 0.2s ease;
+}
+
+input#taskInput:focus {
+    border-color: #dab88b; /* Highlight border on focus */
+}
+
+input#taskInput::placeholder {
+    color: #888; /* Placeholder text color */
+}
+
+/* Button Styles */
+button {
+    padding: 12px 18px;
+    background-color: #dab88b; /* Burlywood color for button */
+    color: white; /* White text for contrast */
+    font-weight: bold;
+    border: none; /* Remove default button border */
+    border-radius: 10px;
+    cursor: pointer; /* Indicate it's clickable */
+    transition: background-color 0.3s ease, transform 0.1s ease; /* Smooth transitions */
+    flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+button:hover {
+    background-color: #c9a77a; /* Slightly darker burlywood on hover */
+    transform: translateY(-1px); /* Slight lift effect */
+}
+
+button:active {
+    transform: translateY(0); /* Reset on click */
+}
+
+/* Task List (UL) Styles */
+ul#taskList { /* Specific selector for your task list */
+    list-style: none; /* Remove default bullet points */
+    padding: 0;       /* Remove default padding */
+    margin: 0;        /* Remove default margin */
+    width: 100%;      /* Make the unordered list take full width of its parent (.container) */
+}
+
+/* Individual List Item (LI - Each Task) Styles */
 li {
-  padding: 10px;
-  border: 1px solid #ccc;
-  margin-top: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    background: #fdfdfd; /* White background for each task item */
+    border: 1px solid #eee; /* Light border */
+    margin-bottom: 12px; /* Space between each task block */
+    padding: 12px;       /* Inner spacing within each block */
+    border-radius: 8px;  /* Rounded corners for the task blocks */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08); /* Subtle shadow for each list item */
+    
+    display: flex; /* Use flexbox to arrange checkbox, text, and delete button */
+    justify-content: space-between; /* Spreads items (checkbox, text, button) evenly */
+    align-items: center; /* Vertically centers items */
+    gap: 10px; /* Space between elements inside the li */
+    
+    transition: all 0.3s ease; /* Smooth transitions for background, etc. */
 }
-.done {
-  text-decoration: line-through;
-  color: gray;
+
+/* Styles for the main task text within the LI */
+.task-text {
+    flex-grow: 1; /* Allows the text to take up available space */
+    margin: 0 5px; /* Adds minimal space around the text */
+    font-size: 1.1em; /* Slightly larger font for tasks */
+    word-break: break-word; /* Prevents long words from overflowing */
+}
+
+/* Style for completed tasks (strikethrough and faded) */
+.task-text.completed {
+    text-decoration: line-through; /* Strikethrough effect */
+    color: #888; /* Dim the color slightly */
+    opacity: 0.7; /* Make it a bit faded */
+    font-style: italic; /* Make completed tasks italic */
+}
+
+/* Custom Checkbox Styles */
+.task-checkbox {
+    /* Hide default browser checkbox appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    width: 20px; /* Size of your custom checkbox */
+    height: 20px;
+    border: 2px solid #a0a0a0; /* Border color for the checkbox */
+    border-radius: 4px; /* Slightly rounded corners */
+    background-color: #fff; /* White background when unchecked */
+    cursor: pointer; /* Change cursor to pointer to indicate clickability */
+    outline: none; /* Remove default focus outline */
+    flex-shrink: 0; /* Prevents checkbox from shrinking */
+
+    transition: background-color 0.2s ease, border-color 0.2s ease; /* Smooth transitions */
+}
+
+/* Style for when the custom checkbox is CHECKED */
+.task-checkbox:checked {
+    background-color: #6a451e; /* Darker brown when checked */
+    border-color: #6a451e;
+}
+
+/* Add a checkmark symbol INSIDE the custom checkbox when checked */
+.task-checkbox:checked::before {
+    content: '✔'; /* Unicode checkmark character */
+    display: block; /* Make it a block to center */
+    color: white; /* White checkmark */
+    font-size: 14px; /* Size of the checkmark */
+    line-height: 1; /* Adjust line height for vertical centering */
+    text-align: center; /* Center the checkmark horizontally */
+}
+
+/* Delete Button Styles */
+.delete-btn {
+    background-color: #e74c3c; /* Red color for delete */
+    color: white; /* White text on the button */
+    font-size: 0.9em; /* Slightly smaller font size */
+    border: none;
+    border-radius: 5px;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0; /* Prevents the button from shrinking */
+}
+
+.delete-btn:hover {
+    background-color: #c0392b; /* Darker red on hover */
 }
