@@ -1,0 +1,19 @@
+.color-box {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  background-color: lightgray;
+  transition: background-color 0.5s ease;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
