@@ -1,0 +1,78 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f2f5;  
+}
+.quiz-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 90%;
+  text-align: center;
+}
+h1 {
+  margin-bottom: 25px;
+  color: #333;
+}
+#question-container {
+  margin-bottom: 25px;
+}
+#question {
+  color: #555;
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+.btn-grid {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(2, 1fr); /* Two columns, equal width */
+  margin-bottom: 20px;
+}
+.btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  text-decoration: none;
+}
+.btn:hover {
+  background-color: #0056b3;
+}
+/* Styling for correct and incorrect answers (we'll add these classes with JS) */
+.btn.correct {
+  background-color: green;
+}
+.btn.incorrect {
+  background-color: red;
+}
+.next-btn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+  display: none; /* Hidden by default */
+}
+.next-btn:hover {
+    background-color: #5a6268;
+}
+/* For small screens */
+@media (max-width: 768px) {
+  .btn-grid {
+    grid-template-column: 1fr; /* Single column on smaller screens */
+  }
+}
