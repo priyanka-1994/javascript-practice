@@ -1,0 +1,41 @@
+<!-- Simple Currency Converter -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-container">
+        <h1>Currency Converter</h1>
+        <div class="currency-from-container">
+            <input type="number" id="amountFROMConverter" class="amountConverter" placeholder="From" />
+            <select id="currencyFROMConverter">
+                <option value="INR" selected>INR</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="CAD">CAD</option>
+                <option value="AUD">AUD</option>
+            </select>
+        </div>
+        <div class="currency-to-container">
+            <input type="number" id="amountTOConverter" class="amountConverter" placeholder="To" />
+            <select id="currencyTOConverter">
+                <option value="INR">INR</option>
+                <option value="USD" selected>USD</option>
+                <option value="EUR">EUR</option>
+                <option value="CAD">CAD</option>
+                <option value="AUD">AUD</option>
+            </select>
+        </div>
+
+        <div class="convert-button">
+            <button id="currency-converter">Convert</button>
+        </div>
+        <p id="amount"><span>Total Amount: </span></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
