@@ -1,78 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f0f2f5;  
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    margin: 0;
+    font-weight: 400;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
-.quiz-container {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  width: 90%;
-  text-align: center;
+.main-container {
+    width: 90vw;
+    background-color: lightgrey;
+    margin: 17px 20px;
+    padding: 16px 23px;
+    box-shadow: inset 0 0 4px 8px rgba(0,0,0,0.3);
+    border-radius: 12px;
+    height: auto;
+    max-width: 500px;
 }
-h1 {
-  margin-bottom: 25px;
-  color: #333;
+h1, h2 {
+    margin: 12px;
+    text-align: center;
+
 }
-#question-container {
-  margin-bottom: 25px;
+#timer {
+    margin-bottom: 13px;
+    text-align: center;
 }
-#question {
-  color: #555;
-  font-size: 1.5em;
-  margin-bottom: 20px;
+.answer-button {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 equal columns */
+    gap: 10px; /* Space between columns */
 }
-.btn-grid {
-  display: grid;
-  gap: 15px;
-  grid-template-columns: repeat(2, 1fr); /* Two columns, equal width */
-  margin-bottom: 20px;
+button {
+    min-height: 48px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 12px;
+    margin: 16px;
 }
-.btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 15px 20px;
-  border-radius: 5px;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  text-align: center;
-  text-decoration: none;
+
+button:active {
+    transform: scale(0.98);
 }
-.btn:hover {
-  background-color: #0056b3;
-}
-/* Styling for correct and incorrect answers (we'll add these classes with JS) */
-.btn.correct {
-  background-color: green;
-}
-.btn.incorrect {
-  background-color: red;
+.startquiz {
+    align-items: center;
 }
 .next-btn {
-  background-color: #6c757d;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 5px;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 20px;
-  display: none; /* Hidden by default */
+    align-items: center;
 }
-.next-btn:hover {
-    background-color: #5a6268;
+#score {
+    visibility: hidden;
 }
-/* For small screens */
-@media (max-width: 768px) {
-  .btn-grid {
-    grid-template-column: 1fr; /* Single column on smaller screens */
-  }
+.correct {
+    background-color: green;
+}
+.incorrect {
+    background-color: red;;
+}
+
+@media(max-width: 700px) {
+    .main-container {
+        width: 90%;
+        padding: 12px;    
+    }
+    .answer-button {
+        grid-template-columns: 1fr;
+    }
+    button {
+        margin: 10px auto;
+        width: 100%;
+    }
 }
