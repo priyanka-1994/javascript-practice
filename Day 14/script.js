@@ -1,173 +1,166 @@
-// 1. Get references to our HTML elements
-const questionElement = document.getElementById("question");
-const answerButtonsElement = document.getElementById("answer-buttons");
-const nextButton = document.getElementById("next-btn");
+const quizQuestions = document.getElementById('quiz-question'); 
+const answerButtons = document.querySelector ('.answer-button'); 
+const nextbutton = document.getElementById('next-btn'); 
+const startquiz = document.getElementById('startquiz');
+const scoreDisplay = document.getElementById('score'); // Selects the paragraph element for displaying score
+const timerDisplay = document.getElementById('timer'); 
 
-// 2. Define our quiz questions and answers
-const questions = [
-    {
-        question: "What is the capital of France?",
-        answers: [
-            { text: "London", correct: false },
-            { text: "Paris", correct: true },
-            { text: "Berlin", correct: false },
-            { text: "Rome", correct: false }
-        ]
-    },
-    {
-        question: "Which planet is known as the Red Planet?",
-        answers: [
-            { text: "Earth", correct: false },
-            { text: "Mars", correct: true },
-            { text: "Jupiter", correct: false },
-            { text: "Venus", correct: false }
-        ]
-    },
-    {
-        question: "What is 2 + 12?",
-        answers: [
-            { text: "14", correct: true},
-            { text: "3", correct: false },
-            { text: "4", correct: false },
-            { text: "5", correct: false },
-            { text: "6", correct: false }
-        ]
-    },
-    {
-        question: "What is the largest ocean on Earth?",
-        answers: [
-            { text: "Atlantic Ocean", correct: false },
-            { text: "Indian Ocean", correct: false },
-            { text: "Arctic Ocean", correct: false },
-            { text: "Pacific Ocean", correct: true }
-        ]
-    }
-];
-
-// 3. Variables to keep track of quiz state
 let currentQuestionIndex = 0;
 let score = 0;
+let timeLeft = 15; // Sets the initial time for each question (in seconds)
+let timerInterval;
 
-// 4. Function to start the quiz
+const Questions = [
+    {
+        question: "Which planet is known as the Red Planet?",
+        options: ["Mars","Jupyter"],
+        correctAnswer: "Mars", 
+    },
+    {
+        question: "What is the capital of France?",
+        options: ["Berlin", "Madrid", "Paris", "Rome"],
+        correctAnswer: "Paris",
+    },
+    {
+        question: "What is the currency of Japan?",
+        options: ["Japanese Yen", "USD" ,"INR","EUR"],
+        correctAnswer: "Japanese Yen",
+    },
+    {
+        question: "How many legs does a spider have?",
+        options: ["10", "8" ,"12","2"],
+        correctAnswer: "8",
+    },
+    {
+        question: "What is the fastest bird in the world?",
+        options: ["Japan", "Peregrine Falcon" ,"Peacock","Cat"],
+        correctAnswer: "Peregrine Falcon",
+    },
+    {
+        question: "How many hearts does an octopus have?",
+        options: ["10", "8" ,"12","3"],
+        correctAnswer: "3",
+    },
+    {
+        question: "Which is the fastest land animal?",
+        options: ["Cheetah", "Peacock" ,"Snail","Bat"],
+        correctAnswer: "Cheetah",
+    },
+
+];
+
 function startQuiz() {
-    currentQuestionIndex = 0; // Reset for new quiz
-    score = 0; // Reset score
-    nextButton.innerHTML = "Next"; // Change button text back to "Next" for restart
-    showQuestion(); // Call the function to display the first question
+    currentQuestionIndex = 0;
+    score = 0;
+    nextbutton.innerHTML = "Next";
+    startquiz.style.display = "none";
+    timerDisplay.style.display = "block";
+    loadQuestion();
 }
-
-// 5. Function to display the current question
-function showQuestion() {
-    // Hide the next button initially for each new question
-    nextButton.style.display = "none";
-
-    // Clear any previous answer buttons
-    // This loop removes all child elements from the answerButtonsElement
-    while (answerButtonsElement.firstChild) {
-        answerButtonsElement.removeChild(answerButtonsElement.firstChild);
+function loadQuestion() {  
+    nextbutton.style.display = "none";    
+    while(answerButtons.firstChild) {
+        answerButtons.removeChild(answerButtons.firstChild);
     }
 
-    // Get the current question object
-    let currentQuestion = questions[currentQuestionIndex];
-    let questionNo = currentQuestionIndex + 1; // For displaying "Question 1 of X"
+    let currentQuestion = Questions[currentQuestionIndex];
+    let questionNo = currentQuestionIndex + 1;
+    quizQuestions.innerHTML = `${questionNo}. ${currentQuestion.question}`; 
+    
+    
+    currentQuestion.options.forEach((option) => {
+        const button = document.createElement('button');
+        button.textContent = option;
+        button.classList.add('btn');
 
-    // Update the question text in the HTML
-    questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
-
-    // Create buttons for each answer option
-    currentQuestion.answers.forEach(answer => {
-        const button = document.createElement("button"); // Create a new button element
-        button.innerHTML = answer.text; // Set the button's text to the answer option
-        button.classList.add("btn"); // Add the 'btn' class for styling
-
-        // Add a data attribute to store if the answer is correct
-        // This is a common way to attach custom data to HTML elements
-        if (answer.correct) {
-            button.dataset.correct = answer.correct;
+        if(option === currentQuestion.correctAnswer) {
+            button.dataset.correct = "true";
         }
-
-        answerButtonsElement.appendChild(button); // Add the button to the answer buttons container
-    });
-
-    // Call selectAnswer to add event listeners to the newly created buttons
-    selectAnswer();
+        answerButtons.appendChild(button);
+        });
+        resetTimer();
 }
 
-// 6. Function to handle answer selection
-function selectAnswer() {
-    // Add event listeners to all answer buttons after they are created
-    Array.from(answerButtonsElement.children).forEach(button => {
-        button.addEventListener("click", e => {
-            const selectedButton = e.target; // Get the button that was clicked
-            // Check if the data-correct attribute exists and its value is "true"
-            // Note: dataset values are always strings, so compare to "true"
-            const isCorrect = selectedButton.dataset.correct === "true"; 
+function showScore() {
+    nextbutton.style.display = "none";  
 
-            if (isCorrect) {
-                selectedButton.classList.add("correct"); // Add green background for correct
-                score++; // Increment score if correct
+    // forgot
+    while(answerButtons.firstChild) {
+        answerButtons.removeChild(answerButtons.firstChild);
+    }
+    timerDisplay.style.display = 'none';
+
+
+    quizQuestions.innerHTML = `You have scored ${score} out of ${Questions.length}`;
+    nextbutton.innerHTML = "Play Again";
+    nextbutton.style.display = "block";
+}
+function nextHandleButton() {
+    currentQuestionIndex++;
+    if(Questions.length > currentQuestionIndex){
+        loadQuestion();
+    } else {
+        showScore();    
+    }
+}
+function selectedAnswers() {
+    Array.from(answerButtons.children).forEach(button => {
+        button.addEventListener("click", e => {
+            const selectedButton = e.target;
+            const isCorrect = selectedButton.dataset.correct === "true";
+
+            if(isCorrect) {
+                selectedButton.classList.add('correct');
+                score++;
             } else {
-                selectedButton.classList.add("incorrect"); // Add red background for incorrect
+                selectedButton.classList.add("incorrect");
             }
 
-            // Disable all buttons after an answer is selected and highlight correct one
-            Array.from(answerButtonsElement.children).forEach(button => {
-                // If a button has data-correct="true", always mark it correct (even if not selected)
-                if (button.dataset.correct === "true") {
+            Array.from(answerButtons.children).forEach(button => {
+                if(button.dataset.correct === "true") {
                     button.classList.add("correct");
                 }
-                // Important: remove the event listener from each button after selection
-                // to prevent multiple clicks affecting the score or state
-                button.removeEventListener("click", selectAnswer); 
-                button.disabled = true; // Disable the button
+                button.disabled = true;
             });
-
-            // Show the next button
-            nextButton.style.display = "block";
-        });
+            nextbutton.style.display = "block";
+        }); 
     });
 }
-
-// 7. Function to handle the "Next" button click
-function handleNextButton() {
-    currentQuestionIndex++; // Move to the next question
-    if (currentQuestionIndex < questions.length) {
-        // If there are more questions, show the next one
-        showQuestion();
-    } else {
-        // If no more questions, show the score
-        showScore();
-    }
-}
-
-// 8. Function to show the final score
-function showScore() {
-    // Hide the next button
-    nextButton.style.display = "none";
-
-    // Clear previous answer buttons
-    while (answerButtonsElement.firstChild) {
-        answerButtonsElement.removeChild(answerButtonsElement.firstChild);
-    }
-
-    // Display the score
-    questionElement.innerHTML = `You scored ${score} out of ${questions.length}!`;
-
-    // Change the "Next" button to "Play Again" and show it
-    nextButton.innerHTML = "Play Again";
-    nextButton.style.display = "block";
-}
-
-// 9. Add an event listener to the Next button
-nextButton.addEventListener("click", () => {
-    // If we are at the end of the quiz (i.e., showScore was just called), restart it.
-    // Otherwise, move to the next question.
-    if (currentQuestionIndex < questions.length) {
-        handleNextButton();
+nextbutton.addEventListener("click", () => {
+    if (currentQuestionIndex < Questions.length) {
+        nextHandleButton();
     } else {
         startQuiz(); // Restart the quiz
     }
 });
 
-// Initial call to start the quiz when the script loads
 startQuiz();
+
+function resetTimer() {
+    clearInterval(timerInterval); // Stop any existing timer to prevent multiple timers running
+    timeLeft = 15; // Reset time for the current question
+
+    timerDisplay.innerText = `Time left: ${timeLeft}s`; // Update timer display immediately
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        timerDisplay.innerText = `Time left: ${timeLeft}s`;
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval); // Stop the timer when it reaches zero
+            timerDisplay.innerText = "Time's Up!";
+            
+            // Automatically simulate an incorrect selection if time runs out
+            // This disables buttons, shows correct answer, and makes 'Next' button appear
+            Array.from(answerButtons.children).forEach(button => {
+                button.disabled = true; // Disable all buttons
+                if (button.dataset.correct === "true") {
+                    button.classList.add("correct"); // Highlight correct answer
+                } else {
+                    button.classList.add("incorrect"); // Mark all others as incorrect (if not already disabled)
+                }
+            });
+            nextbutton.style.display = 'block'; // Show the 'Next' button
+        }
+    }, 1000); // Update every 1000 milliseconds (1 second)
+}
