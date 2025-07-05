@@ -7,14 +7,14 @@ const darkModeToggle = document.getElementById('dark-mode-toggle');
 function loadNotes() {
     notesContainer.innerHTML = "";
     const notes = JSON.parse(localStorage.getItem("notes")) || [];
-    notes.forEach(noteText => {
-        createNotes(noteText);
+    notes.forEach(note => {
+        createNotes(note.text, note.color);
     });
 }
-function createNotes(noteText) {
-    console.log("Creating note:", noteText);          // This will show in the browser console
+function createNotes(noteText, color="#f9f9a9") {
     const noteItem = document.createElement('div');
     noteItem.classList.add('note-item');
+    noteItem.style.backgroundColor = color;
 
     const noteContent = document.createElement('div');
     noteContent.classList.add('note-content');
@@ -33,7 +33,7 @@ function createNotes(noteText) {
     deleteBtn.textContent = 'Delete';
 
     deleteBtn.addEventListener("click", () => {
-        noteItem.remove();    
+        noteItem.remove();  
         saveNotes();
     });
     noteItem.appendChild(noteContent);
@@ -43,8 +43,9 @@ function createNotes(noteText) {
 
 addNoteBtn.addEventListener("click",() => {
     const noteText = noteInput.value.trim();
+    const noteColor = document.getElementById("note-color").value;
     if(noteText) {
-        createNotes(noteText);
+        createNotes(noteText, noteColor);
         saveNotes();
         noteInput.value = "";
     } else {
@@ -69,10 +70,11 @@ searchInput.addEventListener("input", filterNotes);
 
 function saveNotes() {
     const notes = [];
-    notesContainer.querySelectorAll('.note-item .note-content').forEach(noteContentDiv => {
-        notes.push(noteContentDiv.textContent);
+    document.querySelectorAll('.note-item').forEach(note => {
+        const text = note.querySelector('.note-content').textContent;
+        const color = note.style.backgroundColor;
+        notes.push({ text,color });
     });
-
     localStorage.setItem("notes", JSON.stringify(notes));
 }
 
@@ -83,8 +85,7 @@ darkModeToggle.addEventListener("click",() => {
     localStorage.setItem("theme",isDark ? "dark" : "light");
 });
 if(localStorage.getItem("theme") === "dark"){
-    document.classList.toggle("dark-mode");
+    document.body.classList.toggle("dark-mode");
     darkModeToggle.textContent = "☀️";
 }
-
 loadNotes();
