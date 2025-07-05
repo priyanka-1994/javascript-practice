@@ -57,7 +57,7 @@ function filterNotes() {
         if (noteText.includes(notesFilter)) {
             allNotes[i].style.display = "flex";
         } else {
-            alert("No match found.")
+            allNotes[i].style.display = "none";
         }
     }
 }
