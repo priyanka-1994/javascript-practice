@@ -48,6 +48,20 @@ addNoteBtn.addEventListener("click",() => {
         alert('Please enter a note..')
     }
 });
+function filterNotes() {
+    const notesFilter = searchInput.value.toLowerCase().trim();
+    const allNotes = document.querySelectorAll('.note-item');
+
+    for (let i = 0; i < allNotes.length; i++) {
+        const noteText = allNotes[i].querySelector('.note-content').textContent.toLowerCase();
+        if (noteText.includes(notesFilter)) {
+            allNotes[i].style.display = "flex";
+        } else {
+            alert("No match found.")
+        }
+    }
+}
+searchInput.addEventListener("input", filterNotes);
 
 function saveNotes() {
     const notes = [];
