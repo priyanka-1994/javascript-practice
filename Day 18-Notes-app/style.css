@@ -78,6 +78,16 @@ h1 {
     flex-grow: 1;
     margin-right: 10px; 
 }
+.search-section {
+    margin: 10px 0;
+}
+#search-input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 
 .delete-note-btn {
     background-color: #dc3545;
@@ -92,4 +102,13 @@ h1 {
 
 .delete-note-btn:hover {
     background-color: #c82333;
+}
+.delete {
+    border-radius: 5px;
+    background-color: floralwhite;
+    font-size: 15px;
+    font-weight: 400;
+}
+.delete:hover {
+    background-color: skyblue;
 }
