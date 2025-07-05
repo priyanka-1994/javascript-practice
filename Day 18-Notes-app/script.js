@@ -1,6 +1,8 @@
 const noteInput = document.getElementById('note-input');
 const addNoteBtn = document.getElementById('add-note-btn');
 const notesContainer = document.getElementById('notes-container');
+const searchInput = document.getElementById('search-input');
+const darkModeToggle = document.getElementById('dark-mode-toggle');
 
 function loadNotes() {
     notesContainer.innerHTML = "";
@@ -28,16 +30,17 @@ function createNotes(noteText) {
 
     const deleteBtn = document.createElement('button');
     deleteBtn.classList.add('delete');
-    deleteBtn.textContent = 'delete';
+    deleteBtn.textContent = 'Delete';
 
     deleteBtn.addEventListener("click", () => {
-        noteItem.remove();    
+        noteItem.remove();    // I was wrting here diffent variable name and method was wrong.
         saveNotes();
     });
     noteItem.appendChild(noteContent);
     noteItem.appendChild(deleteBtn);
     notesContainer.prepend(noteItem);
 }
+// i forgot this
 addNoteBtn.addEventListener("click",() => {
     const noteText = noteInput.value.trim();
     if(noteText) {
@@ -48,6 +51,7 @@ addNoteBtn.addEventListener("click",() => {
         alert('Please enter a note..')
     }
 });
+
 function filterNotes() {
     const notesFilter = searchInput.value.toLowerCase().trim();
     const allNotes = document.querySelectorAll('.note-item');
@@ -65,12 +69,23 @@ searchInput.addEventListener("input", filterNotes);
 
 function saveNotes() {
     const notes = [];
-    
+    // i forgot this
     notesContainer.querySelectorAll('.note-item .note-content').forEach(noteContentDiv => {
         notes.push(noteContentDiv.textContent);
     });
 
     localStorage.setItem("notes", JSON.stringify(notes));
+}
+
+darkModeToggle.addEventListener("click",() => {
+    document.body.classList.toggle("dark-mode");
+    const isDark = document.body.classList.contains("dark-mode");
+    darkModeToggle.textContent = isDark ? "☀️" : "🌙";
+    localStorage.setItem("theme",isDark ? "dark" : "light");
+});
+if(localStorage.getItem("theme") === "dark"){
+    document.classList.toggle("dark-mode");
+    darkModeToggle.textContent = "☀️";
 }
 
 loadNotes();
