@@ -1,14 +1,44 @@
 body {
     font-family: sans-serif;
-    background-color: #f4f4f4;
+    background-color: #ffffff;
+    color: #000000;
+    transition: background-color 0.3s, color 0.3s;
     display: flex;
     justify-content: center;
-    align-items: flex-start; 
+    align-items: flex-start; /* Align to the top */
     min-height: 100vh;
     margin: 0;
-    padding-top: 20px; 
+    padding-top: 20px; /* Some space from the top */
 }
-
+body.dark-mode {
+    background-color: #121212;
+    color: #f0f0f0;
+}
+.dark-mode .note-item {
+  background-color: #1e1e1e;
+  border-color: #444;
+}
+.dark-mode textarea,
+.dark-mode input,
+.dark-mode button {
+    background-color: #2a2a2a;
+    color: #f0f0f0;
+    border-color: #555;
+}
+#dark-mode-toggle {
+    position: fix;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.2s;
+}
+#dark-mode-toggle:hover {
+    transform: scale(1.2);
+}
 .container {
     background-color: #fff;
     padding: 30px;
@@ -37,7 +67,7 @@ h1 {
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
-    resize: vertical; 
+    resize: vertical; /* Allow vertical resizing */
     min-height: 80px;
 }
 
@@ -59,6 +89,8 @@ h1 {
 .notes-container {
     display: grid;
     gap: 15px;
+    /* You can use grid for responsive note layout if you want multiple columns */
+    /* grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); */
 }
 
 .note-item {
@@ -70,13 +102,13 @@ h1 {
     justify-content: space-between;
     align-items: flex-start;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    white-space: pre-wrap; 
-    word-wrap: break-word;
+    white-space: pre-wrap; /* Preserve whitespace and line breaks */
+    word-wrap: break-word; /* Break long words */
 }
 
 .note-content {
     flex-grow: 1;
-    margin-right: 10px; 
+    margin-right: 10px; /* Space between content and delete button */
 }
 .search-section {
     margin: 10px 0;
@@ -111,4 +143,5 @@ h1 {
 }
 .delete:hover {
     background-color: skyblue;
+
 }
