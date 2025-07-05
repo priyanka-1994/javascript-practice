@@ -33,14 +33,14 @@ function createNotes(noteText) {
     deleteBtn.textContent = 'Delete';
 
     deleteBtn.addEventListener("click", () => {
-        noteItem.remove();    // I was wrting here diffent variable name and method was wrong.
+        noteItem.remove();    
         saveNotes();
     });
     noteItem.appendChild(noteContent);
     noteItem.appendChild(deleteBtn);
     notesContainer.prepend(noteItem);
 }
-// i forgot this
+
 addNoteBtn.addEventListener("click",() => {
     const noteText = noteInput.value.trim();
     if(noteText) {
@@ -69,7 +69,6 @@ searchInput.addEventListener("input", filterNotes);
 
 function saveNotes() {
     const notes = [];
-    // i forgot this
     notesContainer.querySelectorAll('.note-item .note-content').forEach(noteContentDiv => {
         notes.push(noteContentDiv.textContent);
     });
