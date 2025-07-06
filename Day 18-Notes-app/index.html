@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
     <title>My Notes App</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,6 +13,13 @@
         <button id="dark-mode-toggle" title="Toggle Dark Mode">🌙</button>
         <h1>My Notes</h1>
         <div class="input-section">
+            <label for="categorySelect"></label>
+                <select id="categorySelect">
+                    <option value="Work">Work</option>
+                    <option value="Personal">Personal</option>
+                    <option value="Urgent">Urgent</option>
+                    <option value="Ideas">Ideas</option>
+                </select>
             <textarea id="note-input" placeholder="Type your note here..."></textarea>
             <input type="color" id="note-color" value="#f9f9a9" title="Choose note color">
             <button id="add-note-btn">Add Note</button>
