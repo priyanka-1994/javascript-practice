@@ -1,6 +1,7 @@
 const noteInput = document.getElementById('note-input');
 const addNoteBtn = document.getElementById('add-note-btn');
 const notesContainer = document.getElementById('notes-container');
+const categorySelect = document.getElementById('categorySelect');
 const searchInput = document.getElementById('search-input');
 const darkModeToggle = document.getElementById('dark-mode-toggle');
 
@@ -8,10 +9,14 @@ function loadNotes() {
     notesContainer.innerHTML = "";
     const notes = JSON.parse(localStorage.getItem("notes")) || [];
     notes.forEach(note => {
-        createNotes(note.text, note.color);
+        createNotes(note.text, note.color, note.category);
     });
-}
-function createNotes(noteText, color="#f9f9a9") {
+}   
+function createNotes(noteText, color="#f9f9a9", noteCategory="General") {
+    const categoryTag = document.createElement('div');
+    categoryTag.classList.add('note-category');
+    categoryTag.textContent = noteCategory;
+
     const noteItem = document.createElement('div');
     noteItem.classList.add('note-item');
     noteItem.style.backgroundColor = color;
@@ -36,16 +41,18 @@ function createNotes(noteText, color="#f9f9a9") {
         noteItem.remove();  
         saveNotes();
     });
+    noteItem.appendChild(categoryTag)
     noteItem.appendChild(noteContent);
     noteItem.appendChild(deleteBtn);
     notesContainer.prepend(noteItem);
 }
 
 addNoteBtn.addEventListener("click",() => {
+    const noteCategory = document.getElementById('categorySelect').value;
     const noteText = noteInput.value.trim();
     const noteColor = document.getElementById("note-color").value;
     if(noteText) {
-        createNotes(noteText, noteColor);
+        createNotes(noteText, noteColor, noteCategory);
         saveNotes();
         noteInput.value = "";
     } else {
@@ -73,7 +80,8 @@ function saveNotes() {
     document.querySelectorAll('.note-item').forEach(note => {
         const text = note.querySelector('.note-content').textContent;
         const color = note.style.backgroundColor;
-        notes.push({ text,color });
+        const category = note.querySelector('.note-category').textContent;
+        notes.push({ text,color,category});
     });
     localStorage.setItem("notes", JSON.stringify(notes));
 }
