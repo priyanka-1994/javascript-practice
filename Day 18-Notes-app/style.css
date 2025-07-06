@@ -1,5 +1,5 @@
 body {
-    font-family: sans-serif;
+    font-family: 'Inter', sans-serif;    
     background-color: #ffffff;
     color: #000000;
     transition: background-color 0.3s, color 0.3s;
@@ -26,7 +26,7 @@ body.dark-mode {
     border-color: #555;
 }
 #dark-mode-toggle {
-    position: fix;
+    position: fixed;
     top: 20px;
     right: 20px;
     background: none;
@@ -60,6 +60,18 @@ h1 {
     gap: 10px;
     margin-bottom: 25px;
 }
+.note-category {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+  align-self: flex-start;
+  letter-spacing: 0.5px;
+}
 
 #note-input {
     width: 100%;
@@ -70,7 +82,6 @@ h1 {
     resize: vertical; /* Allow vertical resizing */
     min-height: 80px;
 }
-
 #add-note-btn {
     background-color: #007bff;
     color: white;
@@ -89,7 +100,6 @@ h1 {
 .notes-container {
     display: grid;
     gap: 15px;
-    /* You can use grid for responsive note layout if you want multiple columns */
     /* grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); */
 }
 
@@ -99,15 +109,18 @@ h1 {
     border: 1px solid #eee;
     border-radius: 5px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-top: 12px;
     white-space: pre-wrap; /* Preserve whitespace and line breaks */
     word-wrap: break-word; /* Break long words */
 }
 
 .note-content {
     flex-grow: 1;
+    margin-bottom: 12px;
     margin-right: 10px; /* Space between content and delete button */
 }
 .search-section {
