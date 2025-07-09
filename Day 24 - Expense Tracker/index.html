@@ -1,4 +1,5 @@
 <!-- Build a mini expense tracker with input fields -->
+<!-- Build a mini expense tracker with input fields -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,16 +7,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Tracker</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Expense Tracker</h2>
-    <input type="text" id="title" placeholder="Enter title..." />
-    <input type="number" id="price" placeholder="Enter price..." />
+    <div class="main-container">
+        <h2>Expense Tracker</h2>
+        <input type="text" id="title" placeholder="Enter title..." />
+        <input type="number" id="price" placeholder="Enter price..." />
 
-    <button onclick="addExpense()">Add Expense</button>
-    <button onclick="clearExpenses()">Clear Expense</button>
-    <p id="listExpense"></p>
-    <p id="TotalExpense">Total: ₹0</p>
+        <div class="button-group">
+            <button onclick="addExpense()">Add Expense</button>
+            <button onclick="clearExpenses()">Clear Expense</button>
+        </div>
+        <p id="listExpense"></p>
+        <p id="TotalExpense">Total: ₹0</p>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
