@@ -6,8 +6,7 @@ const convertButton = document.getElementById("conversion");
 const resultParagraph = document.getElementById("result");
 
 // 2. Your API Key and Base URL for Exchangerate-API
-// IMPORTANT: Replace "YOUR_ACTUAL_API_KEY" with the key you got from exchangerate-api.com
-const API_KEY = "de577932d9b0d95ec70beada"; 
+const API_KEY = "Your_API_KEY"; 
 const BASE_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/`;
 
 // 3. Function to fetch exchange rates from the API
@@ -72,3 +71,45 @@ async function initializeConverter() {
 
 // Call the initialization function when the script starts
 initializeConverter();
+
+
+// 6. Event Listener for the Convert button
+convertButton.addEventListener("click", async () => {
+    // Get the current values from the input field and dropdowns
+    const amount = amountInput.value;
+    const fromCurrency = fromCurrencySelect.value;
+    const toCurrency = toCurrencySelect.value;
+
+    // --- Input Validation ---
+    if (amount === "" || isNaN(amount) || parseFloat(amount) <= 0) {
+        resultParagraph.textContent = "Please enter a valid positive amount.";
+        return; // Stop the function if validation fails
+    }
+
+    // Handle case where source and target currencies are the same
+    if (fromCurrency === toCurrency) {
+        resultParagraph.textContent = `Converting ${fromCurrency} to ${toCurrency} means no change: ${amount} ${fromCurrency}.`;
+        return;
+    }
+
+    // --- Fetching Specific Rates for Conversion ---
+    // We need the rates relative to the 'fromCurrency' (the base currency for conversion)
+    const data = await getExchangerates(fromCurrency);
+
+    if (data && data.conversion_rates) {
+        const rates = data.conversion_rates;
+
+        // Check if the conversion rate for the 'toCurrency' exists
+        if (rates[toCurrency]) {
+            const exchangeRate = rates[toCurrency];
+            const convertedAmount = (parseFloat(amount) * exchangeRate).toFixed(2); // Convert amount to float before multiplication, round to 2 decimal places
+
+            resultParagraph.textContent = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
+        } else {
+            resultParagraph.textContent = `Conversion rate not available for ${toCurrency}.`;
+        }
+    } else {
+        // This covers cases where getExchangerates failed to return data
+        resultParagraph.textContent = "Could not retrieve conversion rates for calculation.";
+    }
+});
