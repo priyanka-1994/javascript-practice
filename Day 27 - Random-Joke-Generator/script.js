@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             jokeText.innerText = data.joke; 
             saveJokes(data.joke);
+            speakJoke(data.joke);
         })
         .catch(error => {
             jokeText.innerText = "Oops! Could not fetch a joke";
@@ -29,4 +30,14 @@ function saveJokes(joke) {
 function loadJokes() {
     let jokeHistory = JSON.parse(localStorage.getItem('jokes')) || [];
     return jokeHistory; 
+}
+function speakJoke(textJoke) {
+    const synth = window.speechSynthesis;
+    const voiceJoke = new SpeechSynthesisUtterance(textJoke);
+
+    voiceJoke.volume=0.8;
+    voiceJoke.pitch=1;
+    voiceJoke.lang='en-US';
+
+    synth.speak(voiceJoke);
 }
