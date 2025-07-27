@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(res=> res.json())
         .then(data => {
             jokeText.innerText = data.joke; 
+            saveJokes(data.joke);
         })
         .catch(error => {
             jokeText.innerText = "Oops! Could not fetch a joke";
@@ -18,3 +19,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+function saveJokes(joke) {
+    const jokeHistory = JSON.parse(localStorage.getItem("jokes")) || [];
+    jokeHistory.push(joke);
+    localStorage.setItem('jokes',JSON.stringify(jokeHistory));
+}
+
+function loadJokes() {
+    let jokeHistory = JSON.parse(localStorage.getItem('jokes')) || [];
+    return jokeHistory; 
+}
