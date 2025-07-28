@@ -37,3 +37,11 @@ button {
 button:hover {
     background-color: antiquewhite;
 }
+
+#ratingButtons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+    padding: 18px;
+    gap: 13px;
+}
