@@ -41,3 +41,18 @@ function speakJoke(textJoke) {
 
     synth.speak(voiceJoke);
 }
+function rateJoke(joke,rating){
+    let ratedJoke = JSON.parse(localStorage.getItem('ratedJoke')) || [];
+    ratedJoke.push({ joke: joke, rating: rating });
+    localStorage.setItem('ratedJoke',JSON.stringify(ratedJoke));
+}
+
+document.getElementById('thumbUp').addEventListener('click',() => {
+    const joke=document.getElementById('joke').innerText;
+    rateJoke(joke,'up');
+});
+
+document.getElementById('thumbDown').addEventListener('click', () => {
+  const joke = document.getElementById('joke').innerText;
+  rateJoke(joke, 'down');
+});
